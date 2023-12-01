@@ -16,7 +16,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from grow_guard import views
+from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('sensors/', views.sensor_list)
 ]
+
+urlpatterns = format_suffix_patterns(urlpatterns)
