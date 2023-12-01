@@ -11,3 +11,11 @@ def sensor_list(request, format=None):
         sensors = Sensor.objects.all()
         serializer = SensorSerializer(sensors, many=True)
         return Response(serializer.data)
+    
+    if request.method == 'POST':
+        serializer = SensorSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+    
