@@ -19,3 +19,15 @@ def sensor_list(request, format=None):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
+
+@api_view(['GET', 'PUT', 'DELETE'])
+def sensor_detail(request, name, format=None):
+    try:
+        sensor = Sensor.objects.get(name = name)
+    except Sensor.DoesNotExist:
+        return Response('Data not found.', status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        serializer = SensorSerializer(sensor)
+        return Response(serializer.data)
+    
