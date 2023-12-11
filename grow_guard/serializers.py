@@ -4,9 +4,9 @@ from .models import Sensor, Device
 class SensorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sensor
-        fields = ['id','name', 'value']
+        fields = ['name', 'value']
 
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Device
-        fields = ['name']
+        fields = ['id', 'name']
