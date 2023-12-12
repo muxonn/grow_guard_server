@@ -21,4 +21,7 @@ class Sensor(models.Model):
 class Camera(models.Model):
     device = models.ForeignKey(Device, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=50)
-    image = models.ImageField(auto_created='files/images')
+    image = models.ImageField(upload_to='files/images')
+
+    def __str__(self):
+        return self.name + ' ' + str(self.device.id)
