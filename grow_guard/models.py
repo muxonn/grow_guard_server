@@ -17,3 +17,8 @@ class Sensor(models.Model):
 
     def __str__(self):
         return self.name + ' ' + self.device.name
+    
+class Camera(models.Model):
+    device = models.ForeignKey(Device, null=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50)
+    image = models.ImageField(auto_created='files/images')

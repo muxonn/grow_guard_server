@@ -1,10 +1,23 @@
 from django.http import JsonResponse
 from .models import Sensor, Device
-from .serializers import SensorSerializer
+from .serializers import SensorSerializer, DeviceSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 
+
+@api_view(['GET', 'POST'])
+def device_list(request, format = None):
+    if request.method == 'GET':
+        devices = Device.objects.all()
+        serializer = DeviceSerializer(devices, many = True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+    if request.method == 'POST':
+        serializer = DeviceSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET', 'POST'])
 def device_sensors(request, device_id, format = None):
