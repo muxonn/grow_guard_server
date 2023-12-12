@@ -25,7 +25,6 @@ def device_sensors(request, device_id, format = None):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
 
-#TODO: check if there is a possibility to add two sensors with the same name
 @api_view(['GET', 'PUT', 'DELETE'])
 def device_sensor_detail(request, device_id, name, format = None):
     try:
