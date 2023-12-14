@@ -66,12 +66,17 @@ def device_sensor_detail(request, device_id, name, format = None):
         sensor.delete()
         return Response(serializer.data, status.HTTP_204_NO_CONTENT)
     
-@api_view(['GET','POST'])
-def upload_image(request):
+@api_view(['POST'])
+def upload_image(request, device_id):
+    try:
+        device = Device.objects.get(id=device_id)
+    except Device.DoesNotExist:
+        return Response({'error': 'Device not found'}, status=status.HTTP_404_NOT_FOUND)
+
     if request.method == 'POST':
         serializer = CameraSerializer(data = request.data)
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(device = device)
             return Response(serializer.data, status = status.HTTP_200_OK)
         else:
             return Response(status = status.HTTP_400_BAD_REQUEST)
@@ -79,3 +84,14 @@ def upload_image(request):
 class CameraView(generics.CreateAPIView):
     queryset = Camera.objects.all()
     serializer_class = CameraSerializer
+
+@api_view(['GET'])
+def get_last_image(request, device_id):
+    try:
+        device = Device.objects.get(id=device_id)
+    except Device.DoesNotExist:
+        return Response({'error': 'Device not found'}, status=status.HTTP_404_NOT_FOUND)
+    if request.method == "GET":
+        last_image = Camera.objects.filter(device = device).last()
+        serializer = CameraSerializer(last_image)
+        return Response(serializer.data, status = status.HTTP_200_OK)

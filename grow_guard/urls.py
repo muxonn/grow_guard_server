@@ -22,16 +22,15 @@ from rest_framework import routers
 from django.conf import settings
 from django.conf.urls.static import static
 
-# router = routers.DefaultRouter()
-# router.register(r'cameras', views.CameraView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('devices/', views.device_list),
     path('devices/<int:device_id>/sensors/', views.device_sensors),
     path('devices/<int:device_id>/sensors/<str:name>', views.device_sensor_detail),
-    #path('cameras/', views.upload_image),
-    path('cameras/', views.CameraView.as_view(), name='camera_create'),
+    path('devices/<int:device_id>/camera/', views.upload_image),
+    #path('cameras/', views.CameraView.as_view(), name='camera_create'),
+    path('devices/<int:device_id>/camera/last/', views.get_last_image)
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 
