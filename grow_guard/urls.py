@@ -15,15 +15,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from grow_guard import views
 from rest_framework.urlpatterns import format_suffix_patterns
+from rest_framework import routers
+from django.conf import settings
+from django.conf.urls.static import static
+
+# router = routers.DefaultRouter()
+# router.register(r'cameras', views.CameraView)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('devices/', views.device_list),
     path('devices/<int:device_id>/sensors/', views.device_sensors),
-    path('devices/<int:device_id>/sensors/<str:name>', views.device_sensor_detail)
-]
+    path('devices/<int:device_id>/sensors/<str:name>', views.device_sensor_detail),
+    #path('cameras/', views.upload_image),
+    path('cameras/', views.CameraView.as_view(), name='camera_create'),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
+
+
 
 urlpatterns = format_suffix_patterns(urlpatterns)
