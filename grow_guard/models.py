@@ -11,7 +11,7 @@ class Sensor(models.Model):
     device = models.ForeignKey(Device, null=True, on_delete=models.CASCADE)
     name = models.CharField(max_length = 50)
     value = models.FloatField(max_length = 50)
-
+    timestamp = models.DateTimeField(auto_now=True, null=True)
     class Meta:
         unique_together = ('name', 'device')
 
