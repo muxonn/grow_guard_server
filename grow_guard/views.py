@@ -1,6 +1,6 @@
 from django.http import JsonResponse
-from .models import Sensor, Device, Camera
-from .serializers import SensorSerializer, DeviceSerializer, CameraSerializer
+from .models import Sensor, Device, Camera, Temperature
+from .serializers import SensorSerializer, DeviceSerializer, CameraSerializer, TemperatureSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status, viewsets, generics
@@ -95,3 +95,22 @@ def get_last_image(request, device_id):
         last_image = Camera.objects.filter(device = device).last()
         serializer = CameraSerializer(last_image)
         return Response(serializer.data, status = status.HTTP_200_OK)
+    
+
+@api_view(['GET', 'POST'])
+def get_temperature(request, device_id):
+    try:
+        device = Device.objects.get(id = device_id)
+    except Device.DoesNotExist:
+        return Response({'error': 'Device not found'}, status=status.HTTP_404_NOT_FOUND)
+    if request.method == 'GET':
+        temperatures = Temperature.objects.filter(device = device)
+        serializer = TemperatureSerializer(temperatures, many = True)
+        return Response(serializer.data, status = status.HTTP_200_OK)
+    
+    if request.method == 'POST':
+        serializer = TemperatureSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save(device = device)
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)

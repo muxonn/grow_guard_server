@@ -30,7 +30,8 @@ urlpatterns = [
     path('devices/<int:device_id>/sensors/<str:name>', views.device_sensor_detail),
     path('devices/<int:device_id>/camera/', views.upload_image),
     #path('cameras/', views.CameraView.as_view(), name='camera_create'),
-    path('devices/<int:device_id>/camera/last/', views.get_last_image)
+    path('devices/<int:device_id>/camera/last/', views.get_last_image),
+    path('devices/<int:device_id>/temperature', views.get_temperature)
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 

@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 class Device(models.Model):
     id = models.AutoField(primary_key=True)
@@ -12,8 +13,12 @@ class Temperature(models.Model):
     value = models.FloatField(max_length = 50)
     timestamp = models.DateTimeField(auto_now_add = True)
 
+    # def save(self, *args, **kwargs):
+    #     self.timestamp = timezone.now()
+    #     return super().save(*args, **kwargs)
+
     def __str__(self):
-        return self.value
+        return '(' + str(self.device.name) + ') ' + str(self.value)
 
 class Humidity(models.Model):
     device = models.ForeignKey(Device, related_name = 'humidities', on_delete = models.CASCADE)
