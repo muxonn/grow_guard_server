@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Sensor, Device, Camera, Temperature, Humidity, Lighting
+from .models import Device, Camera, Temperature, Humidity, Lighting
 
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -20,12 +20,6 @@ class HumiditySerializer(serializers.ModelSerializer):
     class Meta:
         model = Humidity
         fields = ['value', 'timestamp']
-
-
-class SensorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Sensor
-        fields = ['name', 'value']
 
 class CameraSerializer(serializers.ModelSerializer):
     class Meta:

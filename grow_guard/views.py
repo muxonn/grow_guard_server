@@ -1,9 +1,8 @@
-from django.http import JsonResponse
-from .models import Sensor, Device, Camera, Temperature, Humidity, Lighting
-from .serializers import SensorSerializer, DeviceSerializer, CameraSerializer, TemperatureSerializer, HumiditySerializer, LightingSerializer
+from .models import Device, Camera
+from .serializers import DeviceSerializer, CameraSerializer, TemperatureSerializer, HumiditySerializer, LightingSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status, viewsets, generics
+from rest_framework import status
 
 
 @api_view(['GET', 'POST'])
