@@ -29,7 +29,7 @@ class Humidity(models.Model):
         return self.value
 
 class Lighting(models.Model):
-    device = models.ForeignKey(Device, related_name = 'lighting', on_delete = models.CASCADE)
+    device = models.ForeignKey(Device, related_name = 'lightings', on_delete = models.CASCADE)
     value = models.FloatField(max_length = 50)
     timestamp = models.DateTimeField(auto_now_add = True)
 

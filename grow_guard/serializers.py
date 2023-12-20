@@ -9,17 +9,17 @@ class DeviceSerializer(serializers.ModelSerializer):
 class TemperatureSerializer(serializers.ModelSerializer):
     class Meta:
         model = Temperature
-        fields = ['device', 'value', 'timestamp']
+        fields = ['value', 'timestamp']
 
 class LightingSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lighting
-        fields = ['device', 'value', 'timestamp']
+        fields = ['value', 'timestamp']
 
 class HumiditySerializer(serializers.ModelSerializer):
     class Meta:
         model = Humidity
-        fields = ['device', 'value', 'timestamp']
+        fields = ['value', 'timestamp']
 
 
 class SensorSerializer(serializers.ModelSerializer):
