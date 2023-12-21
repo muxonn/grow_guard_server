@@ -85,13 +85,26 @@ def upload_image(request, device_id):
             return Response(status = status.HTTP_400_BAD_REQUEST)
         
 @api_view(['GET'])
-def get_last_image(request, device_id):
+def image_list(request, device_id):
+    count = request.query_params.get('count', None)
+    
+    try:
+        count = int(count)
+    except Exception:
+        count = None
     try:
         device = Device.objects.get(id=device_id)
     except Device.DoesNotExist:
         return Response({'error': 'Device not found'}, status=status.HTTP_404_NOT_FOUND)
+    
     if request.method == "GET":
-        last_image = Camera.objects.filter(device = device).last()
-        serializer = CameraSerializer(last_image)
-        return Response(serializer.data, status = status.HTTP_200_OK)
+        images = device.cameras.all().order_by('-timestamp')
+        serializer = CameraSerializer(images, many=True)
+
+        if count is not None:
+            data = serializer.data[:count]
+        else:
+            data = serializer.data
+
+        return Response(data, status = status.HTTP_200_OK)
     

@@ -24,4 +24,4 @@ class HumiditySerializer(serializers.ModelSerializer):
 class CameraSerializer(serializers.ModelSerializer):
     class Meta:
         model = Camera
-        fields = ['id', 'image']
+        fields = ['id', 'image', 'timestamp']
