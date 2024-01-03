@@ -101,3 +101,18 @@ def camera_data(request, device_id):
             data = serializer.data
 
         return Response(data, status = status.HTTP_200_OK)
+
+@api_view(['GET'])
+def generate_video(request, device_id):
+    try:
+        device = Device.objects.get(id = device_id)
+    except Device.DoesNotExist:
+        return Response({'error': 'Device not found'}, status=status.HTTP_404_NOT_FOUND)
+    
+    if request.method == 'GET':
+        cameras = device.cameras.all()
+        images = [str(camera.image) for camera in cameras]
+        print(images)
+        for i in cameras:
+            print(i.image)
+        return Response(status = status.HTTP_200_OK)
