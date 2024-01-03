@@ -35,6 +35,5 @@ class Camera(models.Model):
     device = models.ForeignKey(Device,  related_name = 'cameras', null=True, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='images')
     timestamp = models.DateTimeField(auto_now_add = True, null = True)
-    
     def __str__(self):
         return self.image.name

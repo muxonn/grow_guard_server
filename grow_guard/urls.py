@@ -27,8 +27,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('devices/', views.device_list),
     path('devices/<int:device_id>/sensors/<str:sensor>/', views.specific_sensor_list),
-    path('devices/<int:device_id>/camera/', views.upload_image),
-    path('devices/<int:device_id>/camera/last/', views.image_list),
+    path('devices/<int:device_id>/camera/', views.camera_data),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 

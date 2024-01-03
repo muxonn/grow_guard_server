@@ -69,8 +69,8 @@ def device_list(request, format = None):
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
-@api_view(['POST'])
-def upload_image(request, device_id):
+@api_view(['POST', 'GET'])
+def camera_data(request, device_id):
     try:
         device = Device.objects.get(id=device_id)
     except Device.DoesNotExist:
@@ -83,21 +83,15 @@ def upload_image(request, device_id):
             return Response(serializer.data, status = status.HTTP_200_OK)
         else:
             return Response(status = status.HTTP_400_BAD_REQUEST)
-        
-@api_view(['GET'])
-def image_list(request, device_id):
-    count = request.query_params.get('count', None)
-    
-    try:
-        count = int(count)
-    except Exception:
-        count = None
-    try:
-        device = Device.objects.get(id=device_id)
-    except Device.DoesNotExist:
-        return Response({'error': 'Device not found'}, status=status.HTTP_404_NOT_FOUND)
     
     if request.method == "GET":
+        count = request.query_params.get('count', None)
+    
+        try:
+            count = int(count)
+        except Exception:
+            count = None
+
         images = device.cameras.all().order_by('-timestamp')
         serializer = CameraSerializer(images, many=True)
 
@@ -107,4 +101,3 @@ def image_list(request, device_id):
             data = serializer.data
 
         return Response(data, status = status.HTTP_200_OK)
-    
