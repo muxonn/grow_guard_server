@@ -12,7 +12,6 @@ def specific_sensor_list(request, device_id, sensor):
         device = Device.objects.get(id = device_id)
     except Device.DoesNotExist:
         return Response({'error': 'Device not found'}, status=status.HTTP_404_NOT_FOUND)
-    print(sensor)
     if request.method == 'GET':
         count = request.query_params.get('count', None)
         

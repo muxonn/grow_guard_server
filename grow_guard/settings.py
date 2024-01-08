@@ -28,6 +28,36 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+LOG_PATH = os.path.join(BASE_DIR, "log/")
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': True,
+    'formatters': {
+        'standard': {
+            'format': '%(asctime)s [%(levelname)s]- %(message)s'}
+
+    },
+    'handlers': {
+        'file': {
+            'level': 'DEBUG',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': LOG_PATH + 'django.log',
+            'formatter': 'standard'
+        },
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'standard'
+        }
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console', "file"],
+            'level': 'INFO',
+            'propagate': True,
+        }
+    },
+}
 
 # Application definition
 
