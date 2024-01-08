@@ -113,6 +113,5 @@ def generate_video(request, device_id):
         cameras = device.cameras.all()
         images = [str(camera.image) for camera in cameras]
         print(images)
-        for i in cameras:
-            print(i.image)
+        
         return Response(status = status.HTTP_200_OK)
