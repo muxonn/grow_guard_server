@@ -28,7 +28,8 @@ urlpatterns = [
     path('devices/', views.device_list),
     path('devices/<int:device_id>/sensors/<str:sensor>/', views.specific_sensor_list),
     path('devices/<int:device_id>/camera/', views.camera_data),
-    path('devices/<int:device_id>/camera/generate_video', views.generate_video)
+    path('devices/<int:device_id>/camera/generate_video', views.generate_video),
+    path('devices/<int:device_id>/led_value/', views.led_value)
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
 

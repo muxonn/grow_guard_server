@@ -1,5 +1,5 @@
-from .models import Device, Camera
-from .serializers import DeviceSerializer, CameraSerializer, TemperatureSerializer, HumiditySerializer, LightingSerializer
+from .models import Device, Camera, Led
+from .serializers import DeviceSerializer, CameraSerializer, TemperatureSerializer, HumiditySerializer, LightingSerializer, LedSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -114,3 +114,28 @@ def generate_video(request, device_id):
         print(images)
         
         return Response(status = status.HTTP_200_OK)
+    
+
+@api_view(['GET', 'PUT', 'POST'])
+def led_value(request, device_id, format = None):
+
+    led = Led.objects.get(device = device_id)
+
+    if request.method == 'GET':
+        serializer = LedSerializer(led)
+        return Response(serializer.data)
+    
+    if request.method == 'PUT':
+        serializer = LedSerializer(led, data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.data, status = status.HTTP_400_BAD_REQUEST)
+    
+    if request.method == 'POST':
+        serializer = LedSerializer(data = request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status = status.HTTP_201_CREATED)
+        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)

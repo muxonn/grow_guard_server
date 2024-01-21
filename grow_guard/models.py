@@ -37,3 +37,9 @@ class Camera(models.Model):
     timestamp = models.DateTimeField(auto_now_add = True, null = True)
     def __str__(self):
         return self.image.name
+
+class Led(models.Model):
+    device = models.OneToOneField(Device, on_delete = models.CASCADE)
+    value = models.IntegerField()
+    def __str__(self):
+        return f"{self.device.id} - Led"

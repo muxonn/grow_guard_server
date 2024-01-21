@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Device, Camera, Temperature, Humidity, Lighting
+from .models import Device, Camera, Temperature, Humidity, Lighting, Led
 
 class DeviceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +25,8 @@ class CameraSerializer(serializers.ModelSerializer):
     class Meta:
         model = Camera
         fields = ['id', 'image', 'timestamp']
+
+class LedSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Led
+        fields = ['value']
