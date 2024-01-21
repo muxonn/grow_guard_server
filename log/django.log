@@ -2708,3 +2708,186 @@ django.db.utils.IntegrityError: UNIQUE constraint failed: grow_guard_led.device_
 2024-01-21 15:31:50,762 [INFO]- D:\Projekty\python\grow_guard_server\grow_guard\grow_guard\serializers.py changed, reloading.
 2024-01-21 15:31:51,523 [INFO]- Watching for file changes with StatReloader
 2024-01-21 15:31:59,283 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:32:47,411 [INFO]- Watching for file changes with StatReloader
+2024-01-21 15:32:47,779 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:32:49,219 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:32:50,916 [WARNING]- Bad Request: /devices/2/led_value/
+2024-01-21 15:32:50,917 [WARNING]- "POST /devices/2/led_value/ HTTP/1.1" 400 8831
+2024-01-21 15:32:54,761 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:32:58,378 [ERROR]- Internal Server Error: /devices/2/led_value/
+Traceback (most recent call last):
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+sqlite3.IntegrityError: NOT NULL constraint failed: grow_guard_led.device_id
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\grow_guard\grow_guard\views.py", line 139, in led_value
+    serializer.save()
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\serializers.py", line 962, in create
+    instance = ModelClass._default_manager.create(**validated_data)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\query.py", line 658, in create
+    obj.save(force_insert=True, using=self.db)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\base.py", line 814, in save
+    self.save_base(
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\base.py", line 877, in save_base
+    updated = self._save_table(
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\base.py", line 1020, in _save_table
+    results = self._do_insert(
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\base.py", line 1061, in _do_insert
+    return manager._insert(
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\sql\compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\backends\utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\backends\utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\backends\utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\backends\utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\backends\utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\backends\sqlite3\base.py", line 328, in execute
+    return super().execute(query, params)
+django.db.utils.IntegrityError: NOT NULL constraint failed: grow_guard_led.device_id
+2024-01-21 15:32:58,393 [ERROR]- "POST /devices/2/led_value/ HTTP/1.1" 500 195690
+2024-01-21 15:34:14,871 [INFO]- "GET /admin/grow_guard/led/ HTTP/1.1" 200 10332
+2024-01-21 15:34:14,891 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:35:40,461 [INFO]- D:\Projekty\python\grow_guard_server\grow_guard\grow_guard\views.py changed, reloading.
+2024-01-21 15:35:41,287 [INFO]- Watching for file changes with StatReloader
+2024-01-21 15:35:44,235 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:35:49,466 [INFO]- "POST /devices/2/led_value/ HTTP/1.1" 201 8790
+2024-01-21 15:35:52,211 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:35:57,375 [INFO]- "POST /devices/2/led_value/ HTTP/1.1" 201 8790
+2024-01-21 15:35:59,359 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:36:01,368 [INFO]- "GET /admin/grow_guard/led/ HTTP/1.1" 200 10332
+2024-01-21 15:36:01,392 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:02,676 [INFO]- "GET /admin/grow_guard/led/5/change/ HTTP/1.1" 200 11624
+2024-01-21 15:36:02,706 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:03,777 [INFO]- "GET /admin/grow_guard/led/5/delete/ HTTP/1.1" 200 8932
+2024-01-21 15:36:05,215 [INFO]- "POST /admin/grow_guard/led/5/delete/ HTTP/1.1" 302 0
+2024-01-21 15:36:05,232 [INFO]- "GET /admin/grow_guard/led/ HTTP/1.1" 200 10276
+2024-01-21 15:36:05,257 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:10,434 [ERROR]- Internal Server Error: /devices/2/led_value/
+Traceback (most recent call last):
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\grow_guard\grow_guard\views.py", line 122, in led_value
+    led = Led.objects.get(device = device_id)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+grow_guard.models.Led.DoesNotExist: Led matching query does not exist.
+2024-01-21 15:36:10,439 [ERROR]- "GET /devices/2/led_value/ HTTP/1.1" 500 108102
+2024-01-21 15:36:15,011 [INFO]- "GET /admin/grow_guard/led/add/ HTTP/1.1" 200 11397
+2024-01-21 15:36:15,041 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:21,282 [INFO]- "POST /admin/grow_guard/led/add/ HTTP/1.1" 302 0
+2024-01-21 15:36:21,303 [INFO]- "GET /admin/grow_guard/led/ HTTP/1.1" 200 10529
+2024-01-21 15:36:21,322 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:23,691 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:36:28,328 [INFO]- "PUT /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:36:29,902 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:36:33,496 [INFO]- "GET /admin/grow_guard/device/ HTTP/1.1" 200 10372
+2024-01-21 15:36:33,528 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:35,000 [INFO]- "GET /admin/grow_guard/device/add/ HTTP/1.1" 200 9764
+2024-01-21 15:36:35,029 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:38,589 [INFO]- "POST /admin/grow_guard/device/add/ HTTP/1.1" 302 0
+2024-01-21 15:36:38,607 [INFO]- "GET /admin/grow_guard/device/ HTTP/1.1" 200 10792
+2024-01-21 15:36:38,637 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:40,290 [INFO]- "GET /admin/grow_guard/led/ HTTP/1.1" 200 10332
+2024-01-21 15:36:40,313 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:41,769 [INFO]- "GET /admin/grow_guard/led/add/ HTTP/1.1" 200 11438
+2024-01-21 15:36:41,795 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:46,028 [INFO]- "POST /admin/grow_guard/led/add/ HTTP/1.1" 302 0
+2024-01-21 15:36:46,046 [INFO]- "GET /admin/grow_guard/led/ HTTP/1.1" 200 10737
+2024-01-21 15:36:46,077 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:36:48,305 [INFO]- "GET /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:36:52,354 [INFO]- "PUT /devices/2/led_value/ HTTP/1.1" 200 8784
+2024-01-21 15:36:54,028 [INFO]- "POST /devices/2/led_value/ HTTP/1.1" 201 8790
+2024-01-21 15:37:06,292 [INFO]- "GET /admin/grow_guard/led/6/change/ HTTP/1.1" 200 11665
+2024-01-21 15:37:06,324 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:37:07,313 [INFO]- "GET /admin/grow_guard/led/6/delete/ HTTP/1.1" 200 8932
+2024-01-21 15:37:08,153 [INFO]- "POST /admin/grow_guard/led/6/delete/ HTTP/1.1" 302 0
+2024-01-21 15:37:08,172 [INFO]- "GET /admin/grow_guard/led/ HTTP/1.1" 200 10485
+2024-01-21 15:37:08,201 [INFO]- "GET /admin/jsi18n/ HTTP/1.1" 200 3343
+2024-01-21 15:37:10,546 [ERROR]- Internal Server Error: /devices/2/led_value/
+Traceback (most recent call last):
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\views\decorators\csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\rest_framework\decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\grow_guard\grow_guard\views.py", line 122, in led_value
+    led = Led.objects.get(device = device_id)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "D:\Projekty\python\grow_guard_server\.venv\lib\site-packages\django\db\models\query.py", line 637, in get
+    raise self.model.DoesNotExist(
+grow_guard.models.Led.DoesNotExist: Led matching query does not exist.
+2024-01-21 15:37:10,549 [ERROR]- "GET /devices/2/led_value/ HTTP/1.1" 500 108131
+2024-01-21 15:38:12,464 [INFO]- D:\Projekty\python\grow_guard_server\grow_guard\grow_guard\views.py changed, reloading.
+2024-01-21 15:38:13,282 [INFO]- Watching for file changes with StatReloader
+2024-01-21 15:38:15,209 [WARNING]- Not Found: /devices/2/led_value/
+2024-01-21 15:38:15,210 [WARNING]- "GET /devices/2/led_value/ HTTP/1.1" 404 8814
