@@ -119,15 +119,26 @@ def generate_video(request, device_id):
 @api_view(['GET', 'PUT', 'POST'])
 def led_value(request, device_id, format = None):
     try:
-        led = Led.objects.get(device = device_id)
-    except Led.DoesNotExist:
-        return Response({'error': 'Led not found'}, status=status.HTTP_404_NOT_FOUND)
+        device = Device.objects.get(id = device_id)
+    except Device.DoesNotExist:
+        return Response({'error': 'Device not found'}, status=status.HTTP_404_NOT_FOUND)
 
+    
     if request.method == 'GET':
+        try:
+            led = Led.objects.get(device = device_id)
+        except Led.DoesNotExist:
+            return Response({"error": 'No LED Data found'}, status = status.HTTP_404_NOT_FOUND)
+        
         serializer = LedSerializer(led)
         return Response(serializer.data)
-    
+        
     if request.method == 'PUT':
+        try:
+            led = Led.objects.get(device = device)
+        except Led.DoesNotExist:
+            return Response({"error": 'No LED Data found'}, status = status.HTTP_404_NOT_FOUND)
+        
         serializer = LedSerializer(led, data = request.data)
         if serializer.is_valid():
             serializer.save()
@@ -136,8 +147,9 @@ def led_value(request, device_id, format = None):
             return Response(serializer.data, status = status.HTTP_400_BAD_REQUEST)
     
     if request.method == 'POST':
-        serializer = LedSerializer(led, data = request.data)
+        serializer = LedSerializer(data = request.data)
+        
         if serializer.is_valid():
-            serializer.save()
+            serializer.save(device = device)
             return Response(serializer.data, status = status.HTTP_201_CREATED)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
